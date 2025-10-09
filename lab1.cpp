@@ -22,7 +22,7 @@ public:
 };
 
 int main() {
-    setlocale(LC_CTYPE, "ukr");
+    setlocale(LC_CTYPE, "eng");
     double x = 0.48 * 8;
     double y = 0.47 * 8;
     double z = -1.32 * 8;
@@ -34,7 +34,7 @@ int main() {
 
     cout << "a = " << a << endl;
     cout << "b = " << b << endl;
-    cout <<endl<<"Çàâäàííÿ 2"<<endl<<endl;
+    cout <<endl<<"2"<<endl<<endl;
     for (float i = -1; i <= 1; i += 0.2) {
         float x = i;
 
