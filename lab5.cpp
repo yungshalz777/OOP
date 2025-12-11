@@ -3,13 +3,15 @@
 
 using namespace std;
 
-// Абстрактний базовий клас
 class Shape {
 public:
-    virtual double getVolume() const = 0; // Чисто віртуальна функція
+    //  віртуальна функція — кожна фігура визначає свій обʼєм
+    virtual double getVolume() const = 0;
+
+    // Віртуальний деструктор 
+    virtual ~Shape() {}
 };
 
-// Клас Паралелепіпед
 class Parallelepiped : public Shape {
 private:
     double a, b, c;
@@ -21,7 +23,6 @@ public:
     }
 };
 
-// Клас Піраміда
 class Pyramid : public Shape {
 private:
     double a, b, h;
@@ -33,7 +34,6 @@ public:
     }
 };
 
-// Клас Куля
 class Sphere : public Shape {
 private:
     double r;
@@ -41,11 +41,10 @@ public:
     Sphere(double r) : r(r) {}
 
     double getVolume() const override {
-        return (4.0 / 3.0) * M_PI * pow(r, 3); // Точніша формула
+        return (4.0 / 3.0) * M_PI * pow(r, 3);
     }
 };
 
-// Клас Тетраедр
 class Tetrahedron : public Shape {
 private:
     double a;
@@ -58,15 +57,24 @@ public:
 };
 
 int main() {
-    Parallelepiped parallelepiped(3, 4, 5);
-    Pyramid pyramid(3, 4, 5);
-    Sphere sphere(3);
-    Tetrahedron tetrahedron(3);
 
-    cout << "Об'єм паралелепіпеда: " << parallelepiped.getVolume() << endl;
-    cout << "Об'єм піраміди: " << pyramid.getVolume() << endl;
-    cout << "Об'єм кулі: " << sphere.getVolume() << endl;
-    cout << "Об'єм тетраедра: " << tetrahedron.getVolume() << endl;
+    Shape* shape; // Один вказівник основа поліморфізму
+
+    shape = new Parallelepiped(3, 4, 5);
+    cout << "Об'єм паралелепіпеда: " << shape->getVolume() << endl;
+    delete shape;
+
+    shape = new Pyramid(3, 4, 5);
+    cout << "Об'єм піраміди: " << shape->getVolume() << endl;
+    delete shape;
+
+    shape = new Sphere(3);
+    cout << "Об'єм кулі: " << shape->getVolume() << endl;
+    delete shape;
+
+    shape = new Tetrahedron(3);
+    cout << "Об'єм тетраедра: " << shape->getVolume() << endl;
+    delete shape;
 
     return 0;
 }
